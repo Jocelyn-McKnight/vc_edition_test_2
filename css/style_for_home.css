@@ -2,6 +2,9 @@ body {
     font-family: 'Times New Roman', serif;
     padding: 30px;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Center all h1 elements */
@@ -14,6 +17,8 @@ h1 {
     display: flex;
     flex-direction: row;
     gap: 10px;
+    min-height: 80vh; /* Ensures container takes up at least 80% of the viewport height */
+    flex: 1; /* Allows the container to fill the available space */
 }
 
 /* Left column */
@@ -33,18 +38,26 @@ h1 {
     width: 100%;
     height: auto;
     margin-top: 0;
+    max-height: 60vh; /* Ensures image height doesn't exceed 60% of the viewport */
 }
 
 /* Right column */
 .right {
     flex: 1;
     display: flex;
-     width: 100%;
-    align-items: flex-start; /* Align content to the top */
+    width: 100%;
+    align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
     padding: 20px;
     box-sizing: border-box;
+}
+
+/* Info section to keep text content within a limited height */
+.info {
+    padding: 10px 0;
+    max-height: 60vh; /* Restricts to 60% of the viewport height */
+    overflow-y: auto; /* Allows scrolling if content exceeds max-height */
 }
 
 /* Navbar styling */
@@ -52,14 +65,64 @@ h1 {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
-    justify-content: center; 
+    justify-content: center;
     width: 100%;
 }
 
-.navbar button {
+.navbar a {
     padding: 10px 15px;
-    border: none;
+    text-decoration: none;
+    color: black;
+    background-color: #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
     cursor: pointer;
+}
+
+.navbar a:hover {
+    background-color: #bbb;
+}
+
+/* 3D Viewer styling */
+#3dhop {
+    max-height: 60vh; /* Limits viewer height */
+    overflow: hidden;
+}
+
+.tdhop {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#toolbar {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 10;
+}
+
+#toolbar img {
+    width: 30px;
+    cursor: pointer;
+}
+
+#draw-canvas {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+}
+
+/* Footer styling */
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
 }
 
 /* Mobile layout: Stack columns on top of each other */
@@ -67,10 +130,14 @@ h1 {
     .container {
         flex-direction: column; /* Stack on top of each other */
     }
-  
+
     .left,
     .right {
         width: 100%;
         height: auto;
+    }
+
+    #3dhop {
+        height: 300px; /* Adjusted height for smaller screens */
     }
 }
